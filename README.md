@@ -2,7 +2,7 @@
 
 **ZeroREST** is a stateful RESTful API fuzzy testing tool that combines OpenAPI-driven test generation with differential testing against a local MySQL model.
 
-> **Note:** This project leverages the [RestTestGen](https://github.com/SeUniVr/RestTestGen) framework. It detects discrepancies between API behavior and the expected underlying data model, surfacing bugs, logical errors, and data integrity issues that traditional black-box testing misses.
+> This project leverages the [RestTestGen](https://github.com/SeUniVr/RestTestGen) framework. It detects discrepancies between API behavior and the expected underlying data model, surfacing bugs, logical errors, and data integrity issues that traditional black-box testing misses.
 
 ## Framework
 ![workflow2](https://gitee.com/xxp121/figurebed/raw/master/img/workflow2.png)
