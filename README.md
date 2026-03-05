@@ -5,7 +5,7 @@
 > This project leverages the [RestTestGen](https://github.com/SeUniVr/RestTestGen) framework. It detects discrepancies between API behavior and the expected underlying data model, surfacing bugs, logical errors, and data integrity issues that traditional black-box testing misses.
 
 ## Framework
-![workflow2](https://gitee.com/xxp121/figurebed/raw/master/img/workflow2.png)
+<img width="2518" height="997" alt="workflow2" src="https://github.com/user-attachments/assets/c589786b-e18b-449b-a834-b26f04bb3600" />
 
 
 ## Bugs Found in Experiments
