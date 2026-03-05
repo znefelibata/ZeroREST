@@ -1,42 +1,80 @@
 # ZeroREST
-***
 
 **ZeroREST** is a stateful RESTful API fuzzy testing tool that combines OpenAPI-driven test generation with differential testing against a local MySQL model.
 
 > **Note:** This project leverages the [RestTestGen](https://github.com/SeUniVr/RestTestGen) framework. It detects discrepancies between API behavior and the expected underlying data model, surfacing bugs, logical errors, and data integrity issues that traditional black-box testing misses.
 
----
 ## Framework
-![framework—en](https://gitee.com/xxp121/figurebed/raw/master/img/workflow2.png)
+![workflow2](https://gitee.com/xxp121/figurebed/raw/master/img/workflow2.png)
 
----
 
 ## Bugs Found in Experiments
 
-ZeroREST has been validated against real-world APIs. The table below lists confirmed bugs discovered during testing:
+ZeroREST has been validated against real-world APIs (GitLab and WordPress), uncovering **23 confirmed bugs** (11 in GitLab, 12 in WordPress) spanning eight categories. More detailed descriptions can be found in the reported issue.
 
-| # | Classification | Server | Endpoint | Method | Issue |
-|---|----------------|--------|----------|--------|-------|
-| 1 | Logical: use after delete | GitLab | `/users/{id}/custom_attributes` `/users/{id}/custom_attributes/{key}` | GET / GET/PUT/DELETE | [#335276](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) |
-| 2 | Logical: use after delete | GitLab | `/projects/{id}/custom_attributes` `/projects/{id}/custom_attributes/{key}` | GET / GET/PUT/DELETE | [#335276](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) |
-| 3 | Logical: use after delete | GitLab | `/groups/{id}/custom_attributes` `/groups/{id}/custom_attributes/{key}` | GET / GET/PUT/DELETE | [#335276](https://gitlab.com/gitlab-org/gitlab/-/issues/335276) |
-| 4 | Logical: double delete | GitLab | `/projects/{id}/services/github` | DELETE | [#360147](https://gitlab.com/gitlab-org/gitlab/-/issues/360147) |
-| 5 | Invalid parameter: UTF-8 | GitLab | `/hooks` | POST | [#334606](https://gitlab.com/gitlab-org/gitlab/-/issues/334606) |
-| 6 | Invalid parameter: UTF-8 | GitLab | `/projects/{id}/metrics/user_starred_dashboards` | POST | [#334606](https://gitlab.com/gitlab-org/gitlab/-/issues/334606) |
-| 7 | Invalid parameter: UTF-8 | GitLab | `/admin/cluster/add` | POST | [#346121](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) |
-| 8 | Invalid parameter: UTF-8 | GitLab | `/projects/{id}/cluster/user` | POST | [#346121](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) |
-| 9 | Invalid parameter: UTF-8 | GitLab | `/groups/{id}/cluster/user` | POST | [#346121](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) |
-| 10 | Invalid parameter: UTF-8 | GitLab | `/projects/{id}/export` | POST | [#346121](https://gitlab.com/gitlab-org/gitlab/-/issues/346121) |
-| 11 | Invalid parameter: special characters | GitLab | `/projects/{project_id}/variables/{key}` | POST | [#360662](https://gitlab.com/gitlab-org/gitlab/-/issues/360662) |
-| 12 | Invalid parameter: enum type with bad value | GitLab | `/projects/{id}/environments` | GET | [#360138](https://gitlab.com/gitlab-org/gitlab/-/issues/360138) |
-| 13 | Invalid parameter: long string with special characters | GitLab | `/projects/{id}/repository/commits` | GET | [#356922](https://gitlab.com/gitlab-org/gitlab/-/issues/356922) |
-| 14 | Invalid parameter: special characters | GitLab | `/projects/{id}/repository/commits` | POST | [#360312](https://gitlab.com/gitlab-org/gitlab/-/issues/360312) |
-| 15 | Logical: false logic | GitLab | `/projects/{id}/repository/branches` | POST | [#360313](https://gitlab.com/gitlab-org/gitlab/-/issues/360313) |
-| 16 | Logical: reference loop | GitLab | `/projects/{id}/fork/{forked_from_id}` | POST | [#346563](https://gitlab.com/gitlab-org/gitlab/-/issues/346563) |
-| 17 | Unsupported function | GitLab | `/projects` | POST | [#356921](https://gitlab.com/gitlab-org/gitlab/-/issues/356921) |
-| 18 | Unsupported function | WordPress | `/categories/{id}` | DELETE | reported via email |
-| 19 | Unsupported function | WordPress | `/tags/{id}` | DELETE | reported via email |
-| 20 | Logical: duplicated id | WordPress | `/users` | POST | reported via email |
+### Bug Classification Summary
+
+| Bug Category | GitLab | WordPress | Total |
+|--------------|--------|-----------|-------|
+| Duplicate ID | 0 | 2 | 2 |
+| Duplicate Deletion | 2 | 0 | 2 |
+| Post-Deletion Access | 1 | 2 | 3 |
+| Empty/Null Value Error | 2 | 2 | 4 |
+| URL Encoding Error | 0 | 3 | 3 |
+| Unsupported Function | 0 | 3 | 3 |
+| Boundary ID Processing | 3 | 0 | 3 |
+| Creation Failure | 3 | 0 | 3 |
+| **Total** | **11** | **12** | **23** |
+
+---
+
+### Full Bug List
+
+| #  | Category | Server | Endpoint | Method | Issue                                                           |
+|----|----------|--------|----------|--------|-----------------------------------------------------------------|
+| 1  | Empty/Null Value Error | GitLab | `/groups/{id}/badges/{badge_id}` | PUT | [#585869](https://gitlab.com/gitlab-org/gitlab/-/issues/585869) |
+| 2  | Empty/Null Value Error | GitLab | `/admin/ci/variables/{key}` | PUT | [#585849](https://gitlab.com/gitlab-org/gitlab/-/issues/585849) |
+| 3  | Creation Failure | GitLab | `/groups` | POST | [#586605](https://gitlab.com/gitlab-org/gitlab/-/issues/586605) |
+| 4  | Creation Failure | GitLab | `/admin/ci/variables` | POST | [#585847](https://gitlab.com/gitlab-org/gitlab/-/issues/585847) |
+| 5  | Creation Failure | GitLab | `/groups/{id}/badges` | POST | [#585868](https://gitlab.com/gitlab-org/gitlab/-/issues/585868) |
+| 6  | Duplicate Deletion | GitLab | `/broadcast_messages/{id}` | DELETE | [#585861](https://gitlab.com/gitlab-org/gitlab/-/issues/585861) |
+| 7  | Duplicate Deletion | GitLab | `/projects/{id}/badges/{badge_id}` | DELETE | [#585867](https://gitlab.com/gitlab-org/gitlab/-/issues/585867) |
+| 8  | Post-Deletion Access | GitLab | `/admin/ci/variables/{key}` | PUT/DELETE | [#585858](https://gitlab.com/gitlab-org/gitlab/-/issues/585858) |
+| 9  | Boundary ID Processing | GitLab | `/admin/clusters/{cluster_id}` | PUT | [#585854](https://gitlab.com/gitlab-org/gitlab/-/issues/585854) |
+| 10 | Boundary ID Processing | GitLab | `/projects/{id}/badges/{badge_id}` | PUT | [#585870](https://gitlab.com/gitlab-org/gitlab/-/issues/585870) |
+| 11 | Boundary ID Processing | GitLab | `/projects/{id}/jobs/{job_id}/play` | POST | [#585866](https://gitlab.com/gitlab-org/gitlab/-/issues/585866) |
+| 12 | Post-Deletion Access | WordPress | `/posts/{id}` | DELETE/PUT | [#64516](https://core.trac.wordpress.org/ticket/64516#ticket) |
+| 13 | Post-Deletion Access | WordPress | `/pages/{id}/autosaves` | DELETE/POST | [#64516](https://core.trac.wordpress.org/ticket/64516#ticket) |
+| 14 | URL Encoding Error | WordPress | `/tags` | GET | [#64541](https://core.trac.wordpress.org/ticket/64541#ticket) |
+| 15 | URL Encoding Error | WordPress | `/tags` | GET | [#64542](https://core.trac.wordpress.org/ticket/64542#ticket) |
+| 16 | URL Encoding Error | WordPress | `/tags` | GET | [#64542](https://core.trac.wordpress.org/ticket/64542#ticket) |
+| 17 | Duplicate ID | WordPress | `/categories/{id}` | POST | [#64801](https://core.trac.wordpress.org/ticket/64801#ticket) |
+| 18 | Duplicate ID | WordPress | `/posts` | POST | [#64801](https://core.trac.wordpress.org/ticket/64801#ticket) |
+| 19 | Empty/Null Value Error | WordPress | `/categories` | POST | [#64800](https://core.trac.wordpress.org/ticket/64800#ticket) |
+| 20 | Empty/Null Value Error | WordPress | `/tags` | POST | [#64799](https://core.trac.wordpress.org/ticket/64799#ticket) |
+| 21 | Unsupported Function | WordPress | `/categories/{id}` | DELETE | reported via email |
+| 22 | Unsupported Function | WordPress | `/tags/{id}` | DELETE | reported via email |
+| 23 | Unsupported Function | WordPress | `/users/me` | DELETE | reported via email |
+
+---
+
+### Bug Category Descriptions
+
+- **Duplicate ID**: The API incorrectly allows creating resources with identifiers that already exist in the system, leading to data integrity violations. ZeroREST detects this by comparing POST response codes against the shadow database state, where the insert would fail with a uniqueness constraint.
+
+- **Duplicate Deletion**: The API accepts repeated DELETE requests on the same resource without returning an appropriate error (e.g., `404 Not Found`). The shadow database model correctly rejects the second deletion, exposing the discrepancy.
+
+- **Post-Deletion Access**: After a resource is deleted, the API continues to serve or accept modifications to that resource (returning 2XX) instead of `404 Not Found`. The differential oracle flags these responses because the shadow database contains no matching record.
+
+- **Empty/Null Value Error**: In WordPress, endpoints accept empty string values for required fields such as `name`, silently creating malformed records. In GitLab, null-value updates violate data integrity constraints that the underlying model enforces. Both manifest as false-positive 2XX responses.
+
+- **URL Encoding Error**: Endpoints silently accept URL-encoded special characters (e.g., `%25`, `%27`, `%2500`) in parameter values and return 2XX status codes rather than rejecting malformed input. The shadow database model rejects or transforms these values, exposing the inconsistency.
+
+- **Unsupported Function**: Certain API operations trigger internal server errors (5XX), indicating that the functionality is incomplete or contains unhandled edge cases at the implementation level.
+
+- **Boundary ID Processing**: The API fails to properly handle extreme or boundary ID values (e.g., very large integers, negative values, or IDs of non-existent resources), producing inconsistent responses that diverge from the expected shadow database behavior.
+
+- **Creation Failure**: Resource-creation requests (POST) unexpectedly trigger HTTP 5XX errors instead of succeeding or returning a well-formed client error, indicating unhandled server-side logic failures during the creation workflow.
 
 ---
 
