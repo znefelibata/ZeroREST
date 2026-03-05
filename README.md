@@ -43,18 +43,18 @@ ZeroREST has been validated against real-world APIs (GitLab and WordPress), unco
 | 9  | Boundary ID Processing | GitLab | `/admin/clusters/{cluster_id}` | PUT | [#585854](https://gitlab.com/gitlab-org/gitlab/-/issues/585854) |
 | 10 | Boundary ID Processing | GitLab | `/projects/{id}/badges/{badge_id}` | PUT | [#585870](https://gitlab.com/gitlab-org/gitlab/-/issues/585870) |
 | 11 | Boundary ID Processing | GitLab | `/projects/{id}/jobs/{job_id}/play` | POST | [#585866](https://gitlab.com/gitlab-org/gitlab/-/issues/585866) |
-| 12 | Post-Deletion Access | WordPress | `/posts/{id}` | DELETE/PUT | [#64516](https://core.trac.wordpress.org/ticket/64516#ticket) |
-| 13 | Post-Deletion Access | WordPress | `/pages/{id}/autosaves` | DELETE/POST | [#64516](https://core.trac.wordpress.org/ticket/64516#ticket) |
-| 14 | URL Encoding Error | WordPress | `/tags` | GET | [#64541](https://core.trac.wordpress.org/ticket/64541#ticket) |
-| 15 | URL Encoding Error | WordPress | `/tags` | GET | [#64542](https://core.trac.wordpress.org/ticket/64542#ticket) |
-| 16 | URL Encoding Error | WordPress | `/tags` | GET | [#64542](https://core.trac.wordpress.org/ticket/64542#ticket) |
-| 17 | Duplicate ID | WordPress | `/categories/{id}` | POST | [#64801](https://core.trac.wordpress.org/ticket/64801#ticket) |
-| 18 | Duplicate ID | WordPress | `/posts` | POST | [#64801](https://core.trac.wordpress.org/ticket/64801#ticket) |
-| 19 | Empty/Null Value Error | WordPress | `/categories` | POST | [#64800](https://core.trac.wordpress.org/ticket/64800#ticket) |
-| 20 | Empty/Null Value Error | WordPress | `/tags` | POST | [#64799](https://core.trac.wordpress.org/ticket/64799#ticket) |
-| 21 | Unsupported Function | WordPress | `/categories/{id}` | DELETE | reported via email |
-| 22 | Unsupported Function | WordPress | `/tags/{id}` | DELETE | reported via email |
-| 23 | Unsupported Function | WordPress | `/users/me` | DELETE | reported via email |
+| 12 | Post-Deletion Access | WordPress | `/posts/{id}` | DELETE/PUT | [#64516](https://core.trac.wordpress.org/ticket/64516#ticket)   |
+| 13 | Post-Deletion Access | WordPress | `/pages/{id}/autosaves` | DELETE/POST | [#64516](https://core.trac.wordpress.org/ticket/64516#ticket)   |
+| 14 | URL Encoding Error | WordPress | `/tags` | GET | [#64541](https://core.trac.wordpress.org/ticket/64541#ticket)   |
+| 15 | URL Encoding Error | WordPress | `/tags` | GET | [#64542](https://core.trac.wordpress.org/ticket/64542#ticket)   |
+| 16 | URL Encoding Error | WordPress | `/tags` | GET | [#64542](https://core.trac.wordpress.org/ticket/64542#ticket)   |
+| 17 | Duplicate ID | WordPress | `/categories/{id}` | POST | [#64801](https://core.trac.wordpress.org/ticket/64801#ticket)   |
+| 18 | Duplicate ID | WordPress | `/posts` | POST | [#64801](https://core.trac.wordpress.org/ticket/64801#ticket)   |
+| 19 | Empty/Null Value Error | WordPress | `/categories` | POST | [#64800](https://core.trac.wordpress.org/ticket/64800#ticket)   |
+| 20 | Empty/Null Value Error | WordPress | `/tags` | POST | [#64799](https://core.trac.wordpress.org/ticket/64799#ticket)   |
+| 21 | Unsupported Function | WordPress | `/categories/{id}` | DELETE | reported via email                                              |
+| 22 | Unsupported Function | WordPress | `/tags/{id}` | DELETE | reported via email                                              |
+| 23 | Unsupported Function | WordPress | `/users/me` | DELETE | reported via email                                              |
 
 ---
 
